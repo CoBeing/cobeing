@@ -23,7 +23,18 @@
 - **Local Bridge**：独立的通用本地能力桥（已有 Codex、WorkBuddy、Pi、MCP/Provider 等）；不依赖 CoBeing 才能工作。
 - **Cloud Claw / Bot**：用户自有或获许可的云端 Agent；CoBeing 不要求用户迁移到自建统一模型平台。
 
-**CoBeing Core / Basic** 提供共享控制面：稳定用户身份、少量受控基础记忆、私有资源目录、关系确认、具体授权与撤销。任务推理、桌面/通讯应用操作由用户已有节点完成。
+**CoBeing Account 是最小身份内核**：稳定用户身份、登录、App 身份/基本授权与账户生命周期。**Memory、Personal Mesh、CoBeing Network 是三个可选、逻辑独立的服务**，不属于账户本身。Personal Mesh 的通用节点连接技术可在没有 CoBeing 账户时独立使用；CoBeing 通过账户为远程同步和跨应用授权提供统一身份。任务推理、桌面/通讯应用操作由用户已有节点完成。
+
+## 最小账户与可选网络
+
+| 独立层 | 是否必需 | 所有权边界 |
+|---|---|---|
+| **CoBeing Account** | 使用 CoBeing 云服务时必需 | 登录主体、关联身份、App 授权、账户注销 |
+| Memory Service | 可选 | 仅经本人确认的基础记忆与限定读取 |
+| Personal Mesh | 可选 | 本人的设备、节点配对、能力与执行授权 |
+| CoBeing Network | 可选 | 双方关系、明确共享和跨用户有限协作 |
+
+**先逻辑拆分，后按需要拆部署。** 初期各模块可复用一个 Worker/D1；不要为了概念分层提前建设多套服务。
 
 ## 核心设计原则
 

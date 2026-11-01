@@ -2,7 +2,10 @@
 
 **方向性路线，不承诺具体日期；先实现一个真实用户场景再扩展抽象。** CoBeing 是后台共生能力网络；用户体验来自个人聊天助手、WorldDesk 等独立应用。
 
-## R0 — Core/Basic 与个人资源声明
+## R0 — 最小 CoBeing Account + 可选服务
+
+- 账户是唯一稳定的身份依赖，Memory、Personal Mesh、CoBeing Network 各自拥有业务数据和授权；先在现有 Worker/D1 中逻辑模块拆分，保持接口兼容。
+- Local Bridge 的本地 Agent 能力不应强制用户登录 CoBeing，CoBeing 不反向依赖 Local Bridge 才能完成身份认证。
 
 - 已有基础：GitHub 身份登录、按用户隔离的 Basic Memory、记忆导出/删除、双方关系邀请、有限只读 Agent MCP。
 - 最小个人资源目录：所有者登记自己拥有的设备、Local Bridge、Cloud Agent，**登记与真实配对严格区分**。

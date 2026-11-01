@@ -8,20 +8,22 @@
 
 **CoBeing Network：跨人和 Agent 的授权共生网络。** 不同人各自管理自己的 Personal Mesh，通过双方认可的关系、具体资源权限和确认完成协作。仅加为联系人不开放对方节点列表、设备、聊天、文件或私人 Vault。
 
-**CoBeing Core / Basic**：统一身份、少量基础记忆、仅本人可见的资源目录、有限授权、关系及撤销元数据。CoBeing 不充当每项任务的强制代理网关、完整个人数据仓库或社交聊天平台。
+**CoBeing Account / Identity Core**：最小共享身份内核，只负责稳定用户身份、登录方式、应用身份及授权、账户生命周期。**Memory Service、Personal Mesh Service、CoBeing Network Service** 各自拥有自己的业务数据和具体资源授权；它们是可选功能，不属于 Account Core。CoBeing 不充当每项任务的强制代理网关、完整个人数据仓库或社交聊天平台。
 
 ```text
-个人聊天助手          WorldDesk             更多独立产品
-      \                 |                     /
-       -- CoBeing Identity / Memory / Grants --
+个人聊天助手          WorldDesk            更多独立产品
+     |                   |                    |
+     +------------- 按需调用 -----------------+
                          |
-                CoBeing Core / Basic
-                   /            \
-           Personal Mesh    CoBeing Network
-           本人资源域        跨主体授权域
-           /         \            |
-       Local Bridge  Cloud Claw    对方授权的 Mesh
-       原有 Agent/MCP          （共享的具体能力）
+         Memory     Personal Mesh    CoBeing Network
+           |            |                |
+           +------------+----------------+
+                         |
+                   CoBeing Account
+             用户身份 / 登录 / App 授权
+
+ Personal Mesh 独立技术 → Local Bridge / Cloud Claw
+ （本机无需 CoBeing 账号即可正常工作）
 ```
 
 ## 上层应用的责任
@@ -43,7 +45,8 @@
 
 | 部分 | 应当负责 | 不承担 |
 | --- | --- | --- |
-| CoBeing Core 控制面 | 身份、目录、最小状态、关系、授权、撤销、必要审计 | 扫描全部聊天/文件，跑所有 Agent |
+| Account / Identity Core | 登录、稳定身份、应用身份/基本授权和账户生命周期 | 记忆正文、好友关系、设备目录、Agent 执行 |
+| 可选 Memory / Mesh / Network 服务 | 各自的数据、资源权限与撤销；复用 Account 验证主体 | 自动共享好友设备、强制 AI 模型托管 |
 | Personal Mesh 节点 | 执行已授权任务、管理本机资源和原系统权限 | 将私有资源全部上传 Cloudflare |
 | CoBeing Network | 让指定用户按明确请求安全协作 | 公开好友的 Agent、自动互授权限 |
 | 上层应用 | 用户目标、场景、选择数据、用户确认、结果体验 | 自建另一套 CoBeing 网络 |
