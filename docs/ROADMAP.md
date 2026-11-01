@@ -4,7 +4,7 @@
 
 ## R0 — 最小 CoBeing Account + 可选服务
 
-- 账户是唯一稳定的身份依赖，Memory、Personal Mesh、CoBeing Network 各自拥有业务数据和授权；先在现有 Worker/D1 中逻辑模块拆分，保持接口兼容。
+- Account 是 CoBeing 在线服务的最小身份依赖；Memory 与 Network 按需独立。Personal Mesh 首先是可离线/本机独立工作的能力组件，远端登记及授权是可选适配。现阶段优先逻辑边界，不为了拆分概念新建 Worker/DB。
 - Local Bridge 的本地 Agent 能力不应强制用户登录 CoBeing，CoBeing 不反向依赖 Local Bridge 才能完成身份认证。
 
 - 已有基础：GitHub 身份登录、按用户隔离的 Basic Memory、记忆导出/删除、双方关系邀请、有限只读 Agent MCP。
@@ -12,7 +12,12 @@
 - 应用复用统一身份和基本记忆；CoBeing 自身只保留账户/授权管理入口，不开发第三个消费者 App。
 - 首次发布稳定、有实测价值的能力，保持未成熟第三方实验私有。
 
-## R1 — Personal Mesh 的真实价值
+## R1 — 让能力组件解决真实用户痛点
+
+- Local Bridge 继续优先复用已有本机 Agent 和专业软件；Personal Mesh 只有跨设备或备选能力需求出现时才加入执行链路。
+- 不要求用户逐项登记设备和创建网络拓扑，已有组件应优先按原系统权限发现并工作。
+- 用户应只看到任务结果或必须处理的配对/权限提示；失败时不虚报执行完成。
+
 
 - 用户同意的一次性节点配对，可信密钥、有限能力证明与撤销。
 - 一个已安装的 Local Bridge 或用户 Cloud Agent 完成一次用户选择的非破坏性任务。

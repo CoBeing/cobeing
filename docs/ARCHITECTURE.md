@@ -4,26 +4,27 @@
 
 ## 两个不同但相互连接的网络
 
-**Personal Mesh：个人的能力自治网络。** 用户拥有自己的 PC/Mac、Local Bridge、Agent、云 Bot、现有文件和消息服务；CoBeing 帮助本人发现、配对并在受控范围内调用这些资源。即使用户没有建立任何好友关系，Personal Mesh 仍然有价值。
+**Personal Mesh：与 Local Bridge 同类的隐形能力组件。** Local Bridge 优先打通本机软件和 Agent；Personal Mesh 仅在实际任务需要跨设备或在已有许可范围内选择备选能力时，帮助用户接通自己的其他设备与云端 Agent。本机能完成就直接完成，不要求用户先建网络或注册 CoBeing；首次远程配对和敏感操作仍须用户同意。
 
-**CoBeing Network：跨人和 Agent 的授权共生网络。** 不同人各自管理自己的 Personal Mesh，通过双方认可的关系、具体资源权限和确认完成协作。仅加为联系人不开放对方节点列表、设备、聊天、文件或私人 Vault。
+**CoBeing Network：跨人和 Agent 的授权共生网络。** 可以先从双方认可的关系和共享某段选定内容开始，**不要求双方先安装 Personal Mesh**；只有远程 Agent 能力协作才按需借助已授权的 Personal Mesh。仅加为联系人不开放对方节点列表、设备、聊天、文件或私人 Vault。
 
-**CoBeing Account / Identity Core**：最小共享身份内核，只负责稳定用户身份、登录方式、应用身份及授权、账户生命周期。**Memory Service、Personal Mesh Service、CoBeing Network Service** 各自拥有自己的业务数据和具体资源授权；它们是可选功能，不属于 Account Core。CoBeing 不充当每项任务的强制代理网关、完整个人数据仓库或社交聊天平台。
+**CoBeing Account / Identity Core**：最小共享身份内核，只负责稳定用户身份、登录方式、应用身份及授权、账户生命周期。**Memory 与 CoBeing Network 是可选服务，Personal Mesh 是通用独立能力组件，远端登记/授权适配才属于可选 CoBeing 服务**。它们均不属于 Account Core。CoBeing 不充当每项任务的强制代理网关、完整个人数据仓库或社交聊天平台。
 
 ```text
-个人聊天助手          WorldDesk            更多独立产品
-     |                   |                    |
-     +------------- 按需调用 -----------------+
+个人聊天助手        WorldDesk         其他独立应用
+       |                 |                  |
+       +---------- 用户提出任务 ----------+
                          |
-         Memory     Personal Mesh    CoBeing Network
-           |            |                |
-           +------------+----------------+
+           Local Bridge + Personal Mesh
+           本机工具        自己的其他设备/云 Agent
+          （不要求 CoBeing 账户）
+
+  需要在线身份、记忆或人与人的共享时才按需连接：
+                 CoBeing Services
+            Memory  /  Network  / 远端 Mesh 适配
                          |
                    CoBeing Account
-             用户身份 / 登录 / App 授权
-
- Personal Mesh 独立技术 → Local Bridge / Cloud Claw
- （本机无需 CoBeing 账号即可正常工作）
+                  身份 / App 授权
 ```
 
 ## 上层应用的责任
@@ -32,6 +33,17 @@
 - **WorldDesk**：观察、任务与桌面体验；可以默认打包 Local Bridge，但 Bridge 核心继续独立，不认识 WorldDesk 或特定企业应用。
 - **其他应用**：用清晰的身份与作用域复用 CoBeing 的基础能力，不因“同一个用户”就默认互读每个 App 的全部私有数据。
 - **CoBeing Console**：身份、记忆、授权和设备管理的必要入口，不发展为第三个消费者主应用。
+
+## 为什么能力组件要无感
+
+优先解决实际使用障碍，而不是展示技术名词：
+
+- 用户在电脑上已经登录 Codex/WorkBuddy，网页助手要用时，优先直接调用已授权的 Local Bridge，不绕行 CoBeing 云端。
+- 手机需要使用家中电脑的 Agent 时，Personal Mesh 才考虑安全配对和已有连接；电脑不可用时仅在**预先获准**的情况下选择其他资源，否则明确提示失败。
+- 上层应用呈现用户目标和结果，不要求用户每次先打开 Mesh 管理界面、编辑资源清单或手动选路。
+- 用户内容外发、写入原软件、发送消息、跨人调用需要明确权限，不能用“自动化”来绕过同意。
+
+衡量成功主要看用户减少了多少手动步骤、任务完成率和失败回退是否可靠，而不是节点数量或协议覆盖数。
 
 ## 连接与权限的三层区别
 

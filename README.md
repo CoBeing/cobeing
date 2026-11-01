@@ -6,14 +6,16 @@
 
 日常用户体验由各自应用承担；CoBeing 仅在注册登录、记忆同步、设备关联、分享授权和数据管理等必要时提供后台能力与轻量管理入口。
 
-## 两项核心基础能力
+## 隐形能力组件 + 跨主体共生网络
 
-| 能力 | 范围 | 主要价值 |
+| 部分 | 定位 | 用户真正得到的价值 |
 | --- | --- | --- |
-| **Personal Mesh** | **一个人自己的能力网络** | 将个人设备、Local Bridge、已装 Agent、MCP Provider、私人 Vault 和 Cloud Claw/Bot 组织为可发现、可授权调用的资源 |
-| **CoBeing Network** | **不同人和他们 Agent 之间的共生网络** | 双方建立关系，在明确同意下发现、请求和共享有限能力、记忆片段及协作结果 |
+| **Local Bridge** | 通用本机能力组件 | 无需软件厂商先开放 API，也能在授权后复用用户已有软件与 Agent |
+| **Personal Mesh** | 通用个人能力组件 | 本机能完成就直接完成；确有需要时连接自己其他设备或已授权的云端 Agent，并在不可用时可靠回退 |
+| **CoBeing Network** | 跨主体共生服务 | 双方认可关系后，按明确许可共享具体资源或协作结果 |
+| **CoBeing Account** | 最小身份内核 | 仅在需要在线身份、跨应用授权或协作时提供账号与基本权限 |
 
-**两者不是两套独立平台。** Personal Mesh 解决个人资源自治；CoBeing Network 连接多个自治的 Personal Mesh。关系成立不等于授予设备、文件、消息或详细记忆访问权限。
+Local Bridge 和 Personal Mesh 都应**默默替用户减少操作**，不发展成必须打开和配置的新产品。CoBeing Network 连接人与他们愿意共享的部分能力，而非公开个人完整节点拓扑。关系成立不等于授予设备、文件、消息或详细记忆访问权限。
 
 ## 应用与能力
 
@@ -23,7 +25,7 @@
 - **Local Bridge**：独立的通用本地能力桥（已有 Codex、WorkBuddy、Pi、MCP/Provider 等）；不依赖 CoBeing 才能工作。
 - **Cloud Claw / Bot**：用户自有或获许可的云端 Agent；CoBeing 不要求用户迁移到自建统一模型平台。
 
-**CoBeing Account 是最小身份内核**：稳定用户身份、登录、App 身份/基本授权与账户生命周期。**Memory、Personal Mesh、CoBeing Network 是三个可选、逻辑独立的服务**，不属于账户本身。Personal Mesh 的通用节点连接技术可在没有 CoBeing 账户时独立使用；CoBeing 通过账户为远程同步和跨应用授权提供统一身份。任务推理、桌面/通讯应用操作由用户已有节点完成。
+**CoBeing Account 是最小身份内核**：稳定用户身份、登录、App 身份/基本授权与账户生命周期。**Memory 和 CoBeing Network 是可选的 CoBeing 业务服务；Personal Mesh 首先是可独立使用的通用能力组件，仅远程协同时按需接入 CoBeing 的身份与授权适配。**任务推理、桌面/通讯应用操作仍由用户已有节点完成。
 
 ## 最小账户与可选网络
 
