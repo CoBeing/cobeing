@@ -1,36 +1,65 @@
-# CoBeing R0 — architecture boundaries / 架构边界
+# CoBeing Foundation — 产品与网络边界
 
-> This describes the intended contract, not an assertion that every component is implemented.
+> 这是方向和安全边界，不代表所有功能均已实现。CoBeing 是共用的后端能力网络，而非一个新的日常主应用。
 
-## Network model
+## 两个不同但相互连接的网络
 
-**Personal Mesh** connects one person's devices, local services, owned cloud agents and approved tools. IP connectivity should reuse LAN, IPv6, existing VPN/P2P capabilities and safe relay fallbacks when available; CoBeing does not build a mandatory new VPN.
+**Personal Mesh：个人的能力自治网络。** 用户拥有自己的 PC/Mac、Local Bridge、Agent、云 Bot、现有文件和消息服务；CoBeing 帮助本人发现、配对并在受控范围内调用这些资源。即使用户没有建立任何好友关系，Personal Mesh 仍然有价值。
 
-**CoBeing Network** connects people and their agents through mutually agreed relationships, limited shared contexts and revocable permissions.
+**CoBeing Network：跨人和 Agent 的授权共生网络。** 不同人各自管理自己的 Personal Mesh，通过双方认可的关系、具体资源权限和确认完成协作。仅加为联系人不开放对方节点列表、设备、聊天、文件或私人 Vault。
 
-**CoBeing Basic** provides the common identity, basic memory, relationship and resource registration layer. It is not a centralized model gateway, device proxy, comprehensive personal data warehouse or social messenger.
+**CoBeing Core / Basic**：统一身份、少量基础记忆、仅本人可见的资源目录、有限授权、关系及撤销元数据。CoBeing 不充当每项任务的强制代理网关、完整个人数据仓库或社交聊天平台。
 
-## Four components
+```text
+个人聊天助手          WorldDesk             更多独立产品
+      \                 |                     /
+       -- CoBeing Identity / Memory / Grants --
+                         |
+                CoBeing Core / Basic
+                   /            \
+           Personal Mesh    CoBeing Network
+           本人资源域        跨主体授权域
+           /         \            |
+       Local Bridge  Cloud Claw    对方授权的 Mesh
+       原有 Agent/MCP          （共享的具体能力）
+```
 
-1. **Mobile Entry (required):** lightweight web/mobile entry, shortcuts and supported integrations with existing social tools. A web fallback exists even if native integrations are unavailable.
-2. **Local Bridge (optional):** an independent local capability connector for authorized apps, files, agents and providers. CoBeing does not embed the internals of third-party messaging clients.
-3. **Cloud Claw / Bot (optional):** existing user-owned or user-authorized agents and services; available APIs and entitlements must be verified per provider.
-4. **CoBeing Basic (required):** identity, a user-scoped basic memory space, mutual relationship records, a resource registry and consent/revocation metadata.
+## 上层应用的责任
 
-A user can join via **1 + 4**. AI tasks require at least one available authorized capability from **2 or 3**. Both may coexist.
+- **个人聊天助手**：用户自己选定沟通文本，形成建议与关系体验；不默认将私信搬进共享 Basic。实际消息收发由原应用或已授权的 Provider 负责。
+- **WorldDesk**：观察、任务与桌面体验；可以默认打包 Local Bridge，但 Bridge 核心继续独立，不认识 WorldDesk 或特定企业应用。
+- **其他应用**：用清晰的身份与作用域复用 CoBeing 的基础能力，不因“同一个用户”就默认互读每个 App 的全部私有数据。
+- **CoBeing Console**：身份、记忆、授权和设备管理的必要入口，不发展为第三个消费者主应用。
 
-## Memory and trust
+## 连接与权限的三层区别
 
-- Basic Memory is a **private per-user area on shared infrastructure**, not a public shared memory pool.
-- User-owned Personal Vaults may contain deeper history; only user-approved information is copied or referenced by Basic.
-- Original social messages, credentials, private provider internals and device secrets are not ingested by default.
-- External agents receive the minimum selected memory/context needed for the current task; authorization is evaluated by a trusted component, never by untrusted chat text.
-- Relationship invitations and shared memory require separate, explicit consent; they never grant blanket device or vault access.
-- Users need correction, deletion, export and disconnection paths; model/provider use may have distinct data-processing rules.
-- Cloud Basic may need plaintext access for authorized memory retrieval; do not claim end-to-end encryption where that is not true.
+1. **节点声明**：资源所有者记录“我有一个 Local Bridge / Cloud Agent”；此时不表示已安装、在线或能远程调用。
+2. **可信配对**：双方以一次性挑战和设备私钥证明关联，建立撤销能力；只有通过真实验证才能显示为已连接。
+3. **执行授权**：按调用者、目标、动作、时间、范围明确许可；发送消息、写文件等操作需特别确认。授权不因关系建立而自动出现。
 
-## Boundaries and dependencies
+**Personal Mesh ≠ 强制物理 Mesh、P2P、VPN 或新通讯协议。** 先复用同机 MCP/HTTP、现有 Local Bridge、已授权 Cloud Agent；异机需求出现时再选可靠的出站安全连接或中转。只有用户实际需要实时双向通道时才评估长期 WebSocket/其他传输。
 
-Local Bridge and existing providers remain independently maintained. CoBeing does not require users to deploy personal infrastructure to create an account or use Basic Memory. Radio Mesh / Meshtastic is a possible future adapter, not part of the current IP Personal Mesh work.
+## 控制面与执行面
 
-No third-party API, product entitlement, reliability or compatibility should be described as delivered without actual evidence.
+| 部分 | 应当负责 | 不承担 |
+| --- | --- | --- |
+| CoBeing Core 控制面 | 身份、目录、最小状态、关系、授权、撤销、必要审计 | 扫描全部聊天/文件，跑所有 Agent |
+| Personal Mesh 节点 | 执行已授权任务、管理本机资源和原系统权限 | 将私有资源全部上传 Cloudflare |
+| CoBeing Network | 让指定用户按明确请求安全协作 | 公开好友的 Agent、自动互授权限 |
+| 上层应用 | 用户目标、场景、选择数据、用户确认、结果体验 | 自建另一套 CoBeing 网络 |
+
+用户自己的 Personal Vault 可存详细历史；Basic 仅存用户确认的少量基础记忆。托管 Basic 在授权访问时服务端可能读取明文；若未真正实现 E2EE，不得声称“服务端不可见”。
+
+## 对第三方和开发者的最小契约
+
+- 区分用户身份、App 客户端身份、节点身份和特定调用授权。
+- External Agent 不直接拿用户登录 Cookie 或对方的第三方密钥；远程 MCP 逐步按官方 OAuth 资源受众绑定规范互通。
+- 关系可断开、具体授权可撤销；撤销不能消除外部已保存的内容。
+- 跨用户只公开 Owner 主动声明的某个**可申请能力**，不展示私人节点拓扑、IP/主机名、文件路径或凭据。
+- 各 App 不依赖 CoBeing 才能完成自己的全部核心操作；CoBeing 增强跨应用记忆和协作。
+
+## 实际发布边界
+
+R0 的少量账号、记忆、关系邀请与只读 MCP 能力正在私有孵化；单个节点登记到真实设备配对、跨设备任务、跨用户授权执行都需要独立实测。公开仓库没有自动包含私有孵化代码。
+
+Local Bridge / Cloud Claw 等继续是独立能力供应者，既可被 CoBeing 应用使用，也可服务其他客户端；不为 CoBeing 强制重写。

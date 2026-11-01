@@ -1,29 +1,29 @@
-# CoBeing public roadmap / 公开路线图
+# CoBeing — 公开发展路线
 
-**Status:** directional R0 planning, not a promised schedule.
+**方向性路线，不承诺具体日期；先实现一个真实用户场景再扩展抽象。** CoBeing 是后台共生能力网络；用户体验来自个人聊天助手、WorldDesk 等独立应用。
 
-## R0 — usable identity, memory and one AI path
+## R0 — Core/Basic 与个人资源声明
 
-- Lightweight mobile/web entry
-- Basic identity, user-scoped memory, resource registration and consent
-- At least one verified local or cloud Agent integration using existing services
-- A working cross-entry memory retrieval/edit/delete/export flow
+- 已有基础：GitHub 身份登录、按用户隔离的 Basic Memory、记忆导出/删除、双方关系邀请、有限只读 Agent MCP。
+- 最小个人资源目录：所有者登记自己拥有的设备、Local Bridge、Cloud Agent，**登记与真实配对严格区分**。
+- 应用复用统一身份和基本记忆；CoBeing 自身只保留账户/授权管理入口，不开发第三个消费者 App。
+- 首次发布稳定、有实测价值的能力，保持未成熟第三方实验私有。
 
-## R1 — Personal Mesh usability
+## R1 — Personal Mesh 的真实价值
 
-- Secure user-approved device pairing and capability discovery
-- Prefer user-owned IP connectivity and existing Agent implementations
-- Private Vault and optional user-selected encrypted backup/sync
-- Better native/mobile and social-platform entry points where permitted
+- 用户同意的一次性节点配对，可信密钥、有限能力证明与撤销。
+- 一个已安装的 Local Bridge 或用户 Cloud Agent 完成一次用户选择的非破坏性任务。
+- 个人聊天助手和 WorldDesk 复用该能力，任务在原有 Agent/本地软件执行，不把 CoBeing 变成模型网关。
+- Personal Vault、可选备份/同步按真实需求补齐，避免提前建设 VPN/TURN/复杂任务中台。
 
-## R2 — people and Agent collaboration
+## R2 — CoBeing Network 的真实价值
 
-- Mutual invitations, narrow shared-memory scopes and revocable grants
-- Cross-user Agent collaboration for explicitly requested tasks
-- Interoperability with independent implementations
+- 双方关系建立后，Owner **明确共享一项具体能力**；另一方可请求并取得有限授权。
+- 拥有者确认、能力执行、结果返回、按需最小审计和撤销构成首个跨人协作闭环。
+- 经过实测，再扩展到应用间分享与明确受托的 Agent 间协作。
 
-## Deferred
+## 延后
 
-Radio Mesh / Meshtastic adapters, a proprietary model gateway, a new general messenger, a complex DAO system and premature infrastructure duplication.
+全网公开设备目录、自动共享好友记忆、CoBeing 自带完整 Messenger、统一自建 LLM 网关、预设收费协作市场、DAO、无线 Meshtastic 适配、复杂 P2P 隧道与未验证的第三方集成。
 
-Public repositories for stable components will be announced as they become independently useful. See [publication policy](OPEN_SOURCE_POLICY.md).
+稳定组件的独立 Public 仓库按其真实可用程度决定，不批量创建空仓库，不公开未清理的 Private 开发历史。见 [开源发布规范](OPEN_SOURCE_POLICY.md)。
