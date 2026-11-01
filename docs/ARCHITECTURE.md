@@ -45,6 +45,10 @@
 
 衡量成功主要看用户减少了多少手动步骤、任务完成率和失败回退是否可靠，而不是节点数量或协议覆盖数。
 
+## 对其他应用的接入边界
+
+CoBeing 目前的 GitHub 登录只是 CoBeing 本站的 OAuth **客户端**行为，尚不是第三方应用可用的 OAuth/OIDC **身份提供方**。WorldDesk 与 Companion 的本地/公共功能不因 CoBeing 未登录而失效；只有用户主动启用记忆或协作时，才需要有受众和具体范围的 CoBeing 授权。详见 [独立应用的接入约定](INTEGRATION_FOR_APPS.md)。
+
 ## 连接与权限的三层区别
 
 1. **节点声明**：资源所有者记录“我有一个 Local Bridge / Cloud Agent”；此时不表示已安装、在线或能远程调用。

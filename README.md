@@ -48,6 +48,6 @@ Local Bridge 和 Personal Mesh 都应**默默替用户减少操作**，不发展
 
 **状态：R0 早期孵化。** 公共仓库介绍方向、原则与规范；并不代表节点配对、远程任务和跨人能力共享已交付。可运行组件成熟后分别开放。
 
-[架构与安全边界](docs/ARCHITECTURE.md) · [公开路线图](docs/ROADMAP.md) · [开源发布规范](docs/OPEN_SOURCE_POLICY.md)
+[其他应用的接入原则](docs/INTEGRATION_FOR_APPS.md) · [架构与安全边界](docs/ARCHITECTURE.md) · [公开路线图](docs/ROADMAP.md) · [开源发布规范](docs/OPEN_SOURCE_POLICY.md)
 
 License: [Apache-2.0](LICENSE). 第三方项目保留其各自许可证。
