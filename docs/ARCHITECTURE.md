@@ -51,7 +51,7 @@
 2. **可信配对**：双方以一次性挑战和设备私钥证明关联，建立撤销能力；只有通过真实验证才能显示为已连接。
 3. **执行授权**：按调用者、目标、动作、时间、范围明确许可；发送消息、写文件等操作需特别确认。授权不因关系建立而自动出现。
 
-**Personal Mesh 不是新的透明 IP VPN。** 同机优先直接复用 Local Bridge 和 Agent；跨设备规划一条**免额外 VPN 安装/免 CoBeing 注册**的浏览器 WebRTC DataChannel ↔ 已有 Rust Connector 连接：ICE 优先尝试可达 IPv6 P2P，失败再试 IPv4/STUN、最后受控 TURN 中继，首次需短期扫码配对。无法从普通浏览器无安装提供任意家庭 LAN 的 TCP/UDP 透明访问；远程仅暴露用户明确授权的单项能力。现成 Tailscale/Cloud Claw API 也可直接复用。以上只是技术方向，尚未完成两设备 P2P 实机验证。
+**Personal Mesh 不是新的透明 IP VPN。** 同机直接复用 Local Bridge；跨设备规划免额外 VPN 安装/免 CoBeing 注册的浏览器 WebRTC DataChannel ↔ Rust Connector：优先尝试可达 IPv6/IPv4 P2P，**双方均无公网 IP 且无法打洞时，Iroh 的加密 Relay 作为兜底候选**。原生端使用 Iroh 原生 QUIC 直连/Relay；手机浏览器使用 Iroh WASM 时是 Relay-only，需先在真实 Safari/Chrome 上验证，TURN 保留兼容备选，不默认维护两套中继。首次仍需要可信扫码配对；不存在浏览器自动代理任意家庭 LAN 的能力。现成 Tailscale/Cloud Claw API 可直接复用。本方案尚未通过两设备真实连接验证。
 
 ## 控制面与执行面
 

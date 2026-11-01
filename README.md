@@ -15,7 +15,7 @@
 | **CoBeing Network** | 跨主体共生服务 | 双方认可关系后，按明确许可共享具体资源或协作结果 |
 | **CoBeing Account** | 最小身份内核 | 仅在需要在线身份、跨应用授权或协作时提供账号与基本权限 |
 
-Local Bridge 和 Personal Mesh 都应**默默替用户减少操作**，不发展成必须打开和配置的新产品。**规划中的 Personal Mesh Lite** 将提供手机浏览器免额外 VPN、免 CoBeing 注册的 WebRTC/P2P 连接路径：IPv6 可达时优先直连，IPv4/打洞次之，必要时使用受控中继；家中仍需要已安装的 Local Bridge 或等效 Connector，首次必须可信配对。这不是已发布的完整 VPN 功能。CoBeing Network 连接人与他们愿意共享的部分能力，而非公开个人完整节点拓扑。关系成立不等于授予设备、文件、消息或详细记忆访问权限。
+Local Bridge 和 Personal Mesh 都应**默默替用户减少操作**，不发展成必须打开和配置的新产品。**规划中的 Personal Mesh Lite** 将提供手机浏览器免额外 VPN、免 CoBeing 注册的连接路径：WebRTC 优先 IPv6/IPv4 P2P；**两端都在私网且无法直连时，Iroh Relay 作为兜底候选**，浏览器侧 Iroh WASM 需要实机验证（其路径为 Relay 而非浏览器 P2P）；必要时 TURN 作为浏览器兼容备选。原生设备之间可直接使用 Iroh 的 QUIC/打洞/Relay。家中仍需要已安装的 Local Bridge 或等效 Connector，首次必须可信配对。此能力仍在设计/POC 阶段，不是已交付的透明 VPN。CoBeing Network 连接人与他们愿意共享的部分能力，而非公开个人完整节点拓扑。关系成立不等于授予设备、文件、消息或详细记忆访问权限。
 
 ## 应用与能力
 
