@@ -8,6 +8,8 @@
 
 **CoBeing Network：跨人和 Agent 的授权共生网络。** 可以先从双方认可的关系和共享某段选定内容开始，**不要求双方先安装 Personal Mesh**；只有远程 Agent 能力协作才按需借助已授权的 Personal Mesh。仅加为联系人不开放对方节点列表、设备、聊天、文件或私人 Vault。
 
+**Capability Sharing（可选网络服务）**：贡献者将已有平台、Claw 或本地工具中的某项有限能力，通过独立 Offer 提供给指定伙伴。能力发现、节点配对、实际授权 Grant 和执行调用是四个不同状态；分享默认关闭，不能因为双方有关系或对方登录就自动开放整个 Agent。首批种子节点是**新加坡阿里云 QwenPaw**与**上海电信家庭服务**，通过可选的出站连接器接入，动态公网 IP 不作为设备身份。详见 [能力分享 V1](CAPABILITY_SHARING_V1.md)。
+
 **CoBeing Account / Identity Core**：最小共享身份内核，只负责稳定用户身份、登录方式、应用身份及授权、账户生命周期。**Memory 与 CoBeing Network 是可选服务，Personal Mesh 是通用独立能力组件，远端登记/授权适配才属于可选 CoBeing 服务**。它们均不属于 Account Core。CoBeing 不充当每项任务的强制代理网关、完整个人数据仓库或社交聊天平台。
 
 ```text
