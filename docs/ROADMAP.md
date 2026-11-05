@@ -17,6 +17,7 @@
 - 先让独立应用能够查询**公开、无用户数据的服务能力描述**，区分已实现和未实现模块；当前仅私有 R0 代码，尚未线上发布。
 - 在现有 CoBeing Account 之上验证 OAuth/OIDC Provider，先只接入 WorldDesk 和 Companion 两个明确登记的客户端，要求 PKCE、精确回调、受众/权限控制和撤销。**当前 GitHub 登录并不等于 CoBeing 已是 OIDC Provider。**
 - 首个实际业务以 Companion 用户主动保存/读取一条基础记忆为目标；WorldDesk 不登录仍应正常运行。不要开放通用 Agent 执行和公开第三方应用市场。
+- 并行在私有 integrations-lab 验证 [Capability Sharing V1](CAPABILITY_SHARING_V1.md) 的**种子网络**：新加坡阿里云 QwenPaw + 上海本地服务；先完成单项公开文本任务的合成测试及明确授权，不冒充真实跨人生产调用，也不强制登录 CoBeing。
 
 ## R1 — 让能力组件解决真实用户痛点
 
@@ -32,7 +33,7 @@
 
 ## R2 — CoBeing Network 的真实价值
 
-- 双方关系建立后，Owner **明确共享一项具体能力**；另一方可请求并取得有限授权。
+- 指定伙伴收到分享邀请、Owner **明确发布一项具体能力 Offer** 后，申请者才能取得有限授权 Grant；有好友关系并不等于自动开放能力。另一位贡献者可复用相同接口接入，不需要修改 CoBeing Core。
 - 拥有者确认、能力执行、结果返回、按需最小审计和撤销构成首个跨人协作闭环。
 - 经过实测，再扩展到应用间分享与明确受托的 Agent 间协作。
 
