@@ -57,7 +57,20 @@ CoBeing 目前的 GitHub 登录只是 CoBeing 本站的 OAuth **客户端**行�
 2. **可信配对**：双方以一次性挑战和设备私钥证明关联，建立撤销能力；只有通过真实验证才能显示为已连接。
 3. **执行授权**：按调用者、目标、动作、时间、范围明确许可；发送消息、写文件等操作需特别确认。授权不因关系建立而自动出现。
 
-**Personal Mesh 不是新的透明 IP VPN。** 同机直接复用 Local Bridge；跨设备规划免额外 VPN 安装/免 CoBeing 注册的浏览器 WebRTC DataChannel ↔ Rust Connector：优先尝试可达 IPv6/IPv4 P2P，**双方均无公网 IP 且无法打洞时，Iroh 的加密 Relay 作为兜底候选**。原生端使用 Iroh 原生 QUIC 直连/Relay；手机浏览器使用 Iroh WASM 时是 Relay-only，需先在真实 Safari/Chrome 上验证，TURN 保留兼容备选，不默认维护两套中继。首次仍需要可信扫码配对；不存在浏览器自动代理任意家庭 LAN 的能力。现成 Tailscale/Cloud Claw API 可直接复用。本方案尚未通过两设备真实连接验证。
+## Personal Mesh 的传输选择
+
+同机任务沿用 Local Bridge。跨设备时，Personal Mesh 负责可信配对、选择传输和路由已授权的请求，目标设备上的 Local Bridge 继续执行本机能力。Personal Mesh 可独立于 CoBeing 账户工作；跨主体共享才按需接入 CoBeing Network。
+
+| 端点 | 当前决策 | 验证边界 |
+| --- | --- | --- |
+| 两台原生设备 | 优先试验独立 Tailcat CLI 进程，将一个受限 TCP 服务映射到对端回环端口。Iroh QUIC/Relay 保留为原生候选。 | 两台 Mac 已完成合成 HTTP 转发、客户端重连和陌生公钥拒绝测试；默认传输仍待多网络和实际任务验收。 |
+| 手机 Safari / Chrome | 继续验证 WebRTC DataChannel，TURN 可承载 WebRTC 中继。Iroh WASM 是需两端适配的独立 Relay 候选。 | Tailcat 的浏览器实验目前仅经 DERP。原生端的结果不能代替真机浏览器验收。 |
+
+Tailcat 在用户态通过 DERP 引导连接，条件允许后升级为 WireGuard UDP 直连；双方无法直连时可继续通过 DERP 传输。公共中继限速且无可用性承诺，上游接口与协议可能变化，实验锁定版本。现有 Tailscale 或 Cloud Claw 接口仍可按需复用。[Tailcat v0.8.0 传输与稳定性说明](https://github.com/tailscale/tailcat/blob/v0.8.0/README.md)
+
+**设备登记、连接凭据和任务授权各自独立。** 现有节点目录只保存声明，返回 `paired: false` 和 `callable: false`。Tailcat 地址默认含预共享密钥，应通过可信渠道交付，普通日志和节点目录仅保留非敏感标识。监听端限制客户端公钥；建立隧道只证明传输身份。
+
+未来的 Mesh Connector 须在目标端校验调用设备、能力范围和授权有效期，再复用 Local Bridge 的本机授权与任务接口。首个应用实验限定为合成文本摘要；`agent.text.run` 是候选能力名。重试须能按请求 ID 查询原任务，撤销须拒绝后续请求并终止现有会话；运行中任务的取消和终态须单独验证。
 
 ## 控制面与执行面
 
@@ -65,7 +78,7 @@ CoBeing 目前的 GitHub 登录只是 CoBeing 本站的 OAuth **客户端**行�
 | --- | --- | --- |
 | Account / Identity Core | 登录、稳定身份、应用身份/基本授权和账户生命周期 | 记忆正文、好友关系、设备目录、Agent 执行 |
 | 可选 Memory / Mesh / Network 服务 | 各自的数据、资源权限与撤销；复用 Account 验证主体 | 自动共享好友设备、强制 AI 模型托管 |
-| Personal Mesh 节点 | 执行已授权任务、管理本机资源和原系统权限 | 将私有资源全部上传 Cloudflare |
+| Personal Mesh 节点 | 校验设备与能力授权，将请求交给本机能力提供者 | 将私有资源全部上传 Cloudflare |
 | CoBeing Network | 让指定用户按明确请求安全协作 | 公开好友的 Agent、自动互授权限 |
 | 上层应用 | 用户目标、场景、选择数据、用户确认、结果体验 | 自建另一套 CoBeing 网络 |
 
